@@ -18,21 +18,27 @@ class SqlDb {
     String databasepath = await getDatabasesPath();
     String path = join(databasepath, 'atf.db');
     Database mydb = await openDatabase(path,
-        onCreate: _onCreate, version: 2, onUpgrade: _onUpgrade);
+        onCreate: _onCreate, version: 1, onUpgrade: _onUpgrade);
     return mydb;
   }
 
-  _onUpgrade(Database db, int oldversion, int newversion) {
+  _onUpgrade(Database db, int oldversion, int newversion) async {
+    // await db.execute(
+    //     "ALTER TABLE notes ADD COLUMN color TEXT"); //add another column by change version
     print('onUpgarde ===============');
   }
 
   _onCreate(Database db, int version) async {
-    await db.execute('''
+    Batch batch = db.batch();
+    batch.execute('''
       CREATE TABLE "notes"(
         "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-        "note" TEXT NOT NULL
+        "title" TEXT NOT NULL,
+        "note" TEXT NOT NULL,
+        "color" TEXT NOT NULL
       )
     ''');
+    await batch.commit();
     print('onCreate =======================');
   }
 
@@ -62,5 +68,12 @@ class SqlDb {
     Database? mydb = await db;
     int response = await mydb!.rawInsert(sql);
     return response;
+  }
+
+  //delete database
+  deletemydatabase() async {
+    String databasepath = await getDatabasesPath();
+    String path = join(databasepath, 'atf.db');
+    await deleteDatabase(path);
   }
 }
