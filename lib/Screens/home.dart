@@ -49,7 +49,7 @@ class _HomeState extends State<Home> {
                 textColor: Colors.white,
                 onPressed: () async {
                   int response =
-                      await sqlDb.deleteData("DElETE FROM 'notes' WHERE id =7");
+                      await sqlDb.deleteData("DElETE FROM 'notes' WHERE id =3");
                   print('$response');
                 },
                 child: Text("Delete Data"),
@@ -61,7 +61,7 @@ class _HomeState extends State<Home> {
                 textColor: Colors.white,
                 onPressed: () async {
                   int response = await sqlDb.updateData(
-                      "UPDATE 'notes' SET 'note' = 'note nine' WHERE id = 9");
+                      "UPDATE 'notes' SET 'note' = 'note three' WHERE id = 3");
                   print('$response');
                 },
                 child: Text("Update Data"),
