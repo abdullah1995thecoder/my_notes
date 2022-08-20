@@ -29,17 +29,26 @@ class _AddNoteState extends State<AddNote> {
               key: formstate,
               child: Column(
                 children: [
+                  Container(height: 10),
                   TextFormField(
                     controller: title,
-                    decoration: const InputDecoration(hintText: "title"),
+                    decoration: const InputDecoration(
+                      hintText: "title",
+                      border: OutlineInputBorder(),
+                      labelText: 'title ',
+                    ),
                   ),
+                  Container(height: 30),
                   TextFormField(
+                    maxLines: 4,
                     controller: note,
-                    decoration: const InputDecoration(hintText: "note"),
+                    decoration: const InputDecoration(
+                      hintText: "note",
+                      labelText: 'Note ',
+                      border: OutlineInputBorder(),
+                    ),
                   ),
-                  Container(
-                    height: 20,
-                  ),
+                  Container(height: 30),
                   MaterialButton(
                     textColor: Colors.black,
                     color: Colors.amber,

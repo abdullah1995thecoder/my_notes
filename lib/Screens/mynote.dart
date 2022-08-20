@@ -64,8 +64,18 @@ class _mynoteState extends State<mynote> {
                                 child: Card(
                                   elevation: 5,
                                   child: ListTile(
-                                      title: Text("${notes[i]['title']}"),
-                                      subtitle: Text("${notes[i]['note']}"),
+                                      title: Text(
+                                        "${notes[i]['title']}",
+                                        style: const TextStyle(
+                                          fontSize: 25,
+                                        ),
+                                      ),
+                                      subtitle: Text(
+                                        "${notes[i]['note']}",
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                        ),
+                                      ),
                                       trailing: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [

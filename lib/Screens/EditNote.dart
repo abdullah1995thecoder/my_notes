@@ -39,15 +39,25 @@ class _EditNoteState extends State<EditNote> {
               key: formstate,
               child: Column(
                 children: [
+                  Container(height: 10),
                   TextFormField(
                     autofocus: true,
                     controller: title,
-                    decoration: const InputDecoration(hintText: "title"),
+                    decoration: const InputDecoration(
+                      hintText: "title",
+                      border: OutlineInputBorder(),
+                      labelText: 'title ',
+                    ),
                   ),
+                  Container(height: 30),
                   TextFormField(
-                    maxLines: 3,
+                    maxLines: 4,
                     controller: note,
-                    decoration: const InputDecoration(hintText: "note"),
+                    decoration: const InputDecoration(
+                      hintText: "note",
+                      labelText: 'Note ',
+                      border: OutlineInputBorder(),
+                    ),
                   ),
                   Container(
                     height: 20,
