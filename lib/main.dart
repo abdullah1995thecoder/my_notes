@@ -3,8 +3,6 @@ import 'package:my_notes/Screens/AddNote.dart';
 import 'package:my_notes/Screens/EditNote.dart';
 import 'package:my_notes/Screens/mynote.dart';
 
-import 'Screens/home.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -15,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       title: 'ATF',
       home: mynote(),

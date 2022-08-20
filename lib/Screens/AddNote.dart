@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_notes/db/SqlDb.dart';
 
@@ -15,7 +14,6 @@ class _AddNoteState extends State<AddNote> {
 
   TextEditingController note = TextEditingController();
   TextEditingController title = TextEditingController();
-  TextEditingController color = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +22,7 @@ class _AddNoteState extends State<AddNote> {
         title: const Text('Add Note'),
       ),
       body: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: ListView(
           children: [
             Form(
@@ -33,15 +31,11 @@ class _AddNoteState extends State<AddNote> {
                 children: [
                   TextFormField(
                     controller: title,
-                    decoration: InputDecoration(hintText: "title"),
+                    decoration: const InputDecoration(hintText: "title"),
                   ),
                   TextFormField(
                     controller: note,
-                    decoration: InputDecoration(hintText: "note"),
-                  ),
-                  TextFormField(
-                    controller: color,
-                    decoration: InputDecoration(hintText: "color"),
+                    decoration: const InputDecoration(hintText: "note"),
                   ),
                   Container(
                     height: 20,
@@ -51,15 +45,15 @@ class _AddNoteState extends State<AddNote> {
                     color: Colors.amber,
                     onPressed: () async {
                       int response = await sqlDb.insertData('''
-                        INSERT INTO notes ('note' , 'title', 'color' )
-                        VALUES ("${note.text}","${title.text}","${color.text}")
+                        INSERT INTO notes ( 'title','note' )
+                        VALUES ("${title.text}","${note.text}")
                         ''');
                       if (response > 0) {
                         Navigator.of(context).pushNamed('mynote');
                       }
                       print(response);
                     },
-                    child: Text(
+                    child: const Text(
                       'Add Note',
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.bold),

@@ -62,7 +62,7 @@ class _mynoteState extends State<mynote> {
                             itemBuilder: (context, i) {
                               return Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 5),
+                                    horizontal: 5, vertical: 5),
                                 child: Card(
                                   elevation: 5,
                                   child: ListTile(
@@ -93,7 +93,6 @@ class _mynoteState extends State<mynote> {
                                               Navigator.of(context)
                                                   .push(MaterialPageRoute(
                                                 builder: (context) => EditNote(
-                                                  color: notes[i]['color'],
                                                   title: notes[i]['title'],
                                                   note: notes[i]['note'],
                                                   id: notes[i]['id'],
