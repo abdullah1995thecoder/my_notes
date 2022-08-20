@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:my_notes/Screens/EditNote.dart';
 import 'package:my_notes/db/SqlDb.dart';
 
@@ -20,7 +18,7 @@ class _mynoteState extends State<mynote> {
     List<Map> response = await sqlDb.readData("SELECT * FROM notes");
     notes.addAll(response);
     islodaing = false;
-    if (this.mounted) {
+    if (mounted) {
       setState(() {});
     }
   }
@@ -39,15 +37,15 @@ class _mynoteState extends State<mynote> {
           // await sqlDb.deletemydatabase();
           Navigator.of(context).pushNamed('addnote');
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       appBar: AppBar(
-        title: Text('Note App'),
+        title: const Text('Note App'),
       ),
       body: islodaing == true
-          ? Center(child: Text('Loading...'))
+          ? const Center(child: Text('Loading...'))
           : Container(
-              child: notes.length == 0
+              child: notes.isEmpty
                   ? Center(
                       child: Image.asset(
                         'assets/empty.png',
@@ -57,11 +55,11 @@ class _mynoteState extends State<mynote> {
                       children: [
                         ListView.builder(
                             itemCount: notes.length,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemBuilder: (context, i) {
                               return Padding(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 5, vertical: 5),
                                 child: Card(
                                   elevation: 5,
@@ -84,7 +82,7 @@ class _mynoteState extends State<mynote> {
                                               }
                                               print(response);
                                             },
-                                            icon: Icon(Icons.delete),
+                                            icon: const Icon(Icons.delete),
                                             color: Colors.red,
                                           ),
                                           //Update
@@ -99,7 +97,7 @@ class _mynoteState extends State<mynote> {
                                                 ),
                                               ));
                                             },
-                                            icon: Icon(Icons.edit),
+                                            icon: const Icon(Icons.edit),
                                             color: Colors.green,
                                           ),
                                         ],

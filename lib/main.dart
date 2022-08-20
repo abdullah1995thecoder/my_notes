@@ -16,11 +16,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       title: 'ATF',
-      home: mynote(),
+      home: const mynote(),
       routes: {
-        'addnote': (context) => AddNote(),
-        'mynote': (context) => mynote(),
-        'editnote': (context) => EditNote(),
+        'addnote': (context) => const AddNote(),
+        'mynote': (context) => const mynote(),
+        'editnote': (context) => const EditNote(),
       },
     );
   }
