@@ -13,9 +13,11 @@ class _mynoteState extends State<mynote> {
   SqlDb sqlDb = SqlDb();
   bool islodaing = true;
   List notes = [];
+  List notes2 = [];
 
   Future readData() async {
     List<Map> response = await sqlDb.readData("SELECT * FROM notes");
+
     notes.addAll(response);
     islodaing = false;
     if (mounted) {
@@ -35,7 +37,12 @@ class _mynoteState extends State<mynote> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           // await sqlDb.deletemydatabase();
-          Navigator.of(context).pushNamed('addnote');
+          Navigator.of(context).pushNamed('addnote').then((value) {
+            setState(() {
+              notes.clear();
+            });
+            readData();
+          });
         },
         child: const Icon(Icons.add),
       ),
@@ -59,21 +66,21 @@ class _mynoteState extends State<mynote> {
                             shrinkWrap: true,
                             itemBuilder: (context, i) {
                               return Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 5, vertical: 5),
+                                padding: const EdgeInsets.only(
+                                    top: 5, right: 5, left: 5),
                                 child: Card(
-                                  elevation: 5,
+                                  elevation: 10,
                                   child: ListTile(
                                       title: Text(
                                         "${notes[i]['title']}",
                                         style: const TextStyle(
-                                          fontSize: 25,
+                                          fontSize: 20,
                                         ),
                                       ),
                                       subtitle: Text(
                                         "${notes[i]['note']}",
                                         style: const TextStyle(
-                                          fontSize: 20,
+                                          fontSize: 15,
                                         ),
                                       ),
                                       trailing: Row(
@@ -85,10 +92,11 @@ class _mynoteState extends State<mynote> {
                                               int response = await sqlDb.deleteData(
                                                   "DELETE FROM notes WHERE id =${notes[i]['id']}");
                                               if (response > 0) {
-                                                notes.removeWhere((element) =>
-                                                    element['id'] ==
-                                                    notes[i]['id']);
-                                                setState(() {});
+                                                setState(() {
+                                                  notes.removeWhere((element) =>
+                                                      element['id'] ==
+                                                      notes[i]['id']);
+                                                });
                                               }
                                               print(response);
                                             },
@@ -99,13 +107,22 @@ class _mynoteState extends State<mynote> {
                                           IconButton(
                                             onPressed: () {
                                               Navigator.of(context)
-                                                  .push(MaterialPageRoute(
-                                                builder: (context) => EditNote(
-                                                  title: notes[i]['title'],
-                                                  note: notes[i]['note'],
-                                                  id: notes[i]['id'],
+                                                  .push(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EditNote(
+                                                    title: notes[i]['title'],
+                                                    note: notes[i]['note'],
+                                                    id: notes[i]['id'],
+                                                  ),
                                                 ),
-                                              ));
+                                              )
+                                                  .then((value) {
+                                                setState(() {
+                                                  notes.clear();
+                                                  readData();
+                                                });
+                                              });
                                             },
                                             icon: const Icon(Icons.edit),
                                             color: Colors.green,

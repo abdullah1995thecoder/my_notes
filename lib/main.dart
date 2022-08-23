@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       title: 'ATF',
-      home: const mynote(),
-      routes: {
+      initialRoute: 'mynote',
+      routes: <String, WidgetBuilder>{
         'addnote': (context) => const AddNote(),
         'mynote': (context) => const mynote(),
         'editnote': (context) => const EditNote(),

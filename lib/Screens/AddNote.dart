@@ -58,7 +58,7 @@ class _AddNoteState extends State<AddNote> {
                         VALUES ("${title.text}","${note.text}")
                         ''');
                       if (response > 0) {
-                        Navigator.of(context).pushNamed('mynote');
+                        Navigator.of(context).pop();
                       }
                       print(response);
                     },

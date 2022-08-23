@@ -73,7 +73,7 @@ class _EditNoteState extends State<EditNote> {
                         WHERE id = ${widget.id}
                         ''');
                       if (response > 0) {
-                        Navigator.of(context).pushNamed('mynote');
+                        Navigator.of(context).pop();
                       }
                       print(response);
                     },
